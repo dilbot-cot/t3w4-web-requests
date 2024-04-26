@@ -16,8 +16,8 @@ async function getPokemonData(){
 }
 
 // Set data to classes
-async function putDataOnPage(){
-
+async function putDataOnPage(dataToDisplay){
+    document.getElementsByClassName("pokemonName")[0].textContent = dataToDisplay.name;
 }
 
 // Button calls this
@@ -25,7 +25,7 @@ async function getAndDisplayPokemonData(){
     let data = await getPokemonData();
     console.log(data);
 
-    putDataOnPage();
+    putDataOnPage(data);
 }
 
 document.getElementById('create-encounter').addEventListener("click", getAndDisplayPokemonData);
