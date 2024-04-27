@@ -44,8 +44,6 @@ let cryURL = dataToDisplay.cries.latest;
 let pokemonAudioElement = document.querySelector(".pokemonCry");
 pokemonAudioElement.src = cryURL;
 
-
-
 }
 
 // Button calls this
@@ -57,3 +55,4 @@ async function getAndDisplayPokemonData(){
 }
 
 document.getElementById('create-encounter').addEventListener("click", getAndDisplayPokemonData);
+document.getElementById('create-team').addEventListener('click', function);
