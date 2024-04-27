@@ -55,4 +55,33 @@ async function getAndDisplayPokemonData(){
 }
 
 document.getElementById('create-encounter').addEventListener("click", getAndDisplayPokemonData);
-document.getElementById('create-team').addEventListener('click', function);
+
+async function generateTeamData(){
+    
+
+    // let teamArray = [];
+    // for (let index = 0; index < 6; index++) {
+    //     let data = await getPokemonData();
+    //     teamArray.push(data);       
+    // }
+    // return teamArray
+
+    let promiseAllResult = await Promise.all([
+        getPokemonData(),
+        getPokemonData(),
+        getPokemonData(),
+        getPokemonData(),
+        getPokemonData(),
+        getPokemonData(),
+    ]);
+
+    return promiseAllResult;
+}
+async function showTeamData(){
+}
+async function getAndShowTeamData(){
+    let teamData = await generateTeamData();
+    console.log(teamData);
+    showTeamData(teamData); 
+}
+document.getElementById("create-team").addEventListener("click", getAndShowTeamData);
