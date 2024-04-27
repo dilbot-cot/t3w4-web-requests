@@ -103,6 +103,18 @@ async function showTeamData(teamToDisplay){
         newPokemonCard.appendChild(type1Display);
         newPokemonCard.appendChild(type2Display);
 
+        // Pokemon cry button
+        let cryURL = pokemon.cries.latest;
+        let pokemonAudioElement = document.createElement("audio");
+        pokemonAudioElement.src = cryURL;
+        let pokemonAudioPlayButton = document.createElement("button");
+        pokemonAudioPlayButton.textContent = "Play Sound";
+        pokemonAudioPlayButton.addEventListener("click", () => {
+            pokemonAudioElement.play();
+        });
+        pokemonAudioPlayButton.appendChild(pokemonAudioElement);
+        newPokemonCard.appendChild(pokemonAudioPlayButton);
+
         // Apply all content to page
         teamDisplaySection.appendChild(newPokemonCard);
     });
