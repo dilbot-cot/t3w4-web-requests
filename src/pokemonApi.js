@@ -17,7 +17,35 @@ async function getPokemonData(){
 
 // Set data to classes
 async function putDataOnPage(dataToDisplay){
-    document.getElementsByClassName("pokemonName")[0].textContent = dataToDisplay.name;
+
+// Display Pokemon Name
+document.getElementsByClassName("pokemonName")[0].textContent = dataToDisplay.name;
+
+// Display Pokemon 1st Type
+document.getElementsByClassName("pokemonType1")[0].textContent = dataToDisplay.types[0].type.name;
+
+// Check is Pokemon 2nd Type exists, and display
+if (dataToDisplay.types[1]) {
+    document.getElementsByClassName("pokemonType2")[0].textContent = dataToDisplay.types[1].type.name;
+} else {
+    document.getElementsByClassName("pokemonType2")[0].textContent = "";
+}
+let imageContainer = document.querySelector(".pokemonImage img")
+// Check if pokemon is shiny 1 in 8192 chance
+if (Math.floor(Math.random() * 4) + 1 === 1) {
+    imageContainer.src = dataToDisplay.sprites.front_shiny;
+    
+} else {
+    imageContainer.src = dataToDisplay.sprites.front_default;
+}
+
+
+let cryURL = dataToDisplay.cries.latest;
+let pokemonAudioElement = document.querySelector(".pokemonCry");
+pokemonAudioElement.src = cryURL;
+
+
+
 }
 
 // Button calls this
