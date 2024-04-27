@@ -65,7 +65,7 @@ async function generateTeamData(){
     //     teamArray.push(data);       
     // }
     // return teamArray
-
+ 
     let promiseAllResult = await Promise.all([
         getPokemonData(),
         getPokemonData(),
@@ -77,11 +77,24 @@ async function generateTeamData(){
 
     return promiseAllResult;
 }
-async function showTeamData(){
+async function showTeamData(teamToDisplay){
+    let teamDisplaySection = document.getElementById("team-display");
+    teamDisplaySection.innerHTML = "";
+
+    teamToDisplay.forEach((pokemon) => {
+        let newPokemonCard = document.createElement("div");
+        let pokemonNameTitle = document.createElement("h3");
+        pokemonNameTitle.textContent = pokemon.name;
+
+        newPokemonCard.appendChild(pokemonNameTitle);
+        teamDisplaySection.appendChild(newPokemonCard);
+    });
 }
+
 async function getAndShowTeamData(){
     let teamData = await generateTeamData();
     console.log(teamData);
     showTeamData(teamData); 
 }
+
 document.getElementById("create-team").addEventListener("click", getAndShowTeamData);
