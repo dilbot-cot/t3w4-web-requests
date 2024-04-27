@@ -18,24 +18,24 @@ async function getPokemonData(){
 // Set data to classes
 async function putDataOnPage(dataToDisplay){
 
-// Display Pokemon Name
-document.getElementsByClassName("pokemonName")[0].textContent = dataToDisplay.name;
+    // Display Pokemon Name
+    document.getElementsByClassName("pokemonName")[0].textContent = dataToDisplay.name;
 
-// Display Pokemon 1st Type
-document.getElementsByClassName("pokemonType1")[0].textContent = dataToDisplay.types[0].type.name;
+    // Display Pokemon 1st Type
+    document.getElementsByClassName("pokemonType1")[0].textContent = dataToDisplay.types[0].type.name;
 
-// Check is Pokemon 2nd Type exists, and display
-if (dataToDisplay.types[1]) {
-    document.getElementsByClassName("pokemonType2")[0].textContent = dataToDisplay.types[1].type.name;
-} else {
-    document.getElementsByClassName("pokemonType2")[0].textContent = "";
-}
-let imageContainer = document.querySelector(".pokemonImage img")
-// Check if pokemon is shiny 1 in 8192 chance
-if (Math.floor(Math.random() * 4) + 1 === 1) {
-    imageContainer.src = dataToDisplay.sprites.front_shiny;
-    
-} else {
+    // Check is Pokemon 2nd Type exists, and display
+    if (dataToDisplay.types[1]) {
+        document.getElementsByClassName("pokemonType2")[0].textContent = dataToDisplay.types[1].type.name;
+    } else {
+        document.getElementsByClassName("pokemonType2")[0].textContent = "";
+    }
+    let imageContainer = document.querySelector(".pokemonImage img")
+    // Check if pokemon is shiny 1 in 8192 chance
+    if (Math.floor(Math.random() * 4) + 1 === 1) {
+        imageContainer.src = dataToDisplay.sprites.front_shiny;
+        
+    } else {
     imageContainer.src = dataToDisplay.sprites.front_default;
 }
 
@@ -83,10 +83,27 @@ async function showTeamData(teamToDisplay){
 
     teamToDisplay.forEach((pokemon) => {
         let newPokemonCard = document.createElement("div");
+
+        // Pokemon Name
         let pokemonNameTitle = document.createElement("h3");
         pokemonNameTitle.textContent = pokemon.name;
-
         newPokemonCard.appendChild(pokemonNameTitle);
+
+        // Pokemon Types
+        let type1Display = document.createElement("div");
+        let type2Display = document.createElement("div");
+
+        type1Display.textContent = "Type 1: " + pokemon.types[0].type.name
+        if (pokemon.types[1]) {
+            type2Display.textContent = "Type 2: " + pokemon.types[1].type.name;
+        } else {
+            type2Display.textContent = ""
+        }
+
+        newPokemonCard.appendChild(type1Display);
+        newPokemonCard.appendChild(type2Display);
+
+        // Apply all content to page
         teamDisplaySection.appendChild(newPokemonCard);
     });
 }
